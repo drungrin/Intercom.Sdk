@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intercom.Sdk.Droid", "Intercom.Sdk.Droid\Intercom.Sdk.Droid.csproj", "{96586832-2470-4D7F-A6B0-F7593460AE32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intercom.Sdk.Droid.Base", "Intercom.Sdk.Droid.Base\Intercom.Sdk.Droid.Base.csproj", "{055FB8CC-17B3-4D79-9D8E-4F59FC4115CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intercom.Sdk.Droid.Gcm", "Intercom.Sdk.Droid.Gcm\Intercom.Sdk.Droid.Gcm.csproj", "{B50778E7-9244-49E3-A431-FABDB57B3F01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96586832-2470-4D7F-A6B0-F7593460AE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96586832-2470-4D7F-A6B0-F7593460AE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96586832-2470-4D7F-A6B0-F7593460AE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96586832-2470-4D7F-A6B0-F7593460AE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055FB8CC-17B3-4D79-9D8E-4F59FC4115CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055FB8CC-17B3-4D79-9D8E-4F59FC4115CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055FB8CC-17B3-4D79-9D8E-4F59FC4115CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055FB8CC-17B3-4D79-9D8E-4F59FC4115CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50778E7-9244-49E3-A431-FABDB57B3F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50778E7-9244-49E3-A431-FABDB57B3F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50778E7-9244-49E3-A431-FABDB57B3F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50778E7-9244-49E3-A431-FABDB57B3F01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

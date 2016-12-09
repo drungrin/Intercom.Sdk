@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmRegistrationService']" />
+	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmRefreshService']" />
+	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmListenerService']" />
+	<attr path="/api/package[@name='io.intercom.android.sdk.gcm']" name="managedName">Intercom.Sdk.Gcm</attr>
+</metadata>
