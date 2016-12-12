@@ -3,5 +3,5 @@
 	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmRegistrationService']" />
 	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmRefreshService']" />
 	<remove-node path="/api/package[@name='io.intercom.android.sdk.gcm']/class[@name='IntercomGcmListenerService']" />
-	<attr path="/api/package[@name='io.intercom.android.sdk.gcm']" name="managedName">Intercom.Sdk.Gcm</attr>
+	<attr path="/api/package[@name='io.intercom.android.sdk.gcm']" name="managedName">IntercomSdk.Gcm</attr>
 </metadata>

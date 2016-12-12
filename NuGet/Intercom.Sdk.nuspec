@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Intercom.Sdk</id>
-    <version>3.0.15-alpha1</version>
+    <version>3.0.15-alpha2</version>
     <title>Intercom Sdk</title>
     <authors>Michel Moreira</authors>
     <projectUrl>https://github.com/drungrin/Intercom.Sdk</projectUrl>
@@ -12,8 +12,8 @@
     <tags>xamarin, xamarin.forms, android, ios, intercom</tags>
     <dependencies>
       <group targetFramework="MonoAndroid10">
-        <dependency id="Intercom.Sdk.Base" version="3.0.15-alpha1" />
-        <dependency id="Intercom.Sdk.Gcm" version="3.0.15-alpha1" />
+        <dependency id="Intercom.Sdk.Base" version="3.0.15-alpha2" />
+        <dependency id="Intercom.Sdk.Gcm" version="3.0.15-alpha2" />
       </group>
     </dependencies>
   </metadata>

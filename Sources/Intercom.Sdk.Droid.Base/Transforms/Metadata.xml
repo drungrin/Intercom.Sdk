@@ -38,6 +38,6 @@
 	<remove-node path="/api/package[@name='io.intercom.android.sdk']/class[@name='Injector']" />
 	<remove-node path="/api/package[@name='io.intercom.android.sdk']/class[starts-with(@name, 'IntercomPushManager')]" />
 	<remove-node path="//*[@deprecated='deprecated']" />
-	<attr path="/api/package[@name='io.intercom.android.sdk']" name="managedName">Intercom.Sdk</attr>
-	<attr path="/api/package[@name='io.intercom.android.sdk.identity']" name="managedName">Intercom.Sdk.Identity</attr>
+	<attr path="/api/package[@name='io.intercom.android.sdk']" name="managedName">IntercomSdk</attr>
+	<attr path="/api/package[@name='io.intercom.android.sdk.identity']" name="managedName">IntercomSdk.Identity</attr>
 </metadata>
