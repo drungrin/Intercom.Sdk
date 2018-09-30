@@ -1,6 +1,6 @@
 //
 //  Intercom.h
-//  Intercom for iOS - Version 3.0.21
+//  Intercom for iOS
 //
 //  Created by Intercom on 8/01/2015.
 //  Copyright (c) 2014 Intercom. All rights reserved.
@@ -8,19 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ICMUserAttributes.h"
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-#error This version (3.0.21) of Intercom for iOS supports iOS 8.0 upwards.
+#error This version of Intercom for iOS supports iOS 8.0 upwards.
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
-    ICMPreviewPositionBottomLeft   = 0,
-    ICMPreviewPositionBottomRight  = 1,
-    ICMPreviewPositionTopLeft      = 2,
-    ICMPreviewPositionTopRight     = 3
-};
 
 /**
  Intercom is your direct line of communication to every user, right inside your app. Intercom’s in-app messages
@@ -79,6 +73,8 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  */
 @interface Intercom : NSObject
 
+#pragma mark - Intercom Initialisation
+
 //=========================================================================================================
 /*! @name Getting set up */
 //=========================================================================================================
@@ -92,19 +88,21 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
 + (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
 
 //=========================================================================================================
-/*! @name Using secure mode */
+/*! @name Using Identity Verification */
 //=========================================================================================================
 /*!
- Secure Mode helps to make sure that conversations between you and your users are kept private, and that one
- user can't impersonate another. In Secure Mode Intercom for iOS will sign all requests going to the Intercom servers
- with tokens. It requires your mobile application to have its own server which authenticates the app's users,
- and which can store a secret. More information on secure mode can be found [here](http://docs.intercom.io/Install-on-your-mobile-product/enabling-secure-mode-in-intercom-for-ios )
+ Identity Verification helps to make sure that conversations between you and your users are kept private, and that one
+ user can't impersonate another. If Identity Verification is enabled for your app, Intercom for iOS will sign all requests
+ going to the Intercom servers with tokens. It requires your mobile application to have its own server which authenticates the app's users,
+ and which can store a secret. More information on Identity Verification can be found [here](https://developers.intercom.com/docs/ios-identity-verification)
 
+ 
  @note This should be called before any user registration takes place.
- @param hmac A HMAC digest of data.
- @param data A piece of user data.
+ @param userHash A HMAC digest of the user ID or email.
  */
-+ (void)setHMAC:(NSString *)hmac data:(NSString *)data;
++ (void)setUserHash:(NSString *)userHash;
+
+#pragma mark - User Registration
 
 //=========================================================================================================
 /*! @name Working with anonymous users */
@@ -157,14 +155,19 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
 + (void)registerUserWithEmail:(NSString *)email;
 
 //=========================================================================================================
-/*! @name Resetting user data */
+/*! @name Logging the user out */
 //=========================================================================================================
 /*!
- reset is used to reset all local caches and user data Intercom has created. Reset will also close any active
+ logout is used to clear all local caches and user data Intercom has created. Logout will also close any active
  UI that is on screen. Use this at a time when you wish to log a user out of your app or change a user.
  Once called, Intercom for iOS will no longer communicate with Intercom until a further registration is made.
  */
-+ (void)reset;
++ (void)logout;
+
+/*!
+ @deprecated  +[Intercom reset] is deprecated. Use +[Intercom logout] instead.
+ */
++ (void)reset __attribute((deprecated("'+[Intercom reset]' is deprecated. 'Use +[Intercom logout]' instead.")));
 
 //=========================================================================================================
 /** @name Updating the user */
@@ -173,44 +176,14 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  You can send any data you like to Intercom. Typically our customers see a lot of value in sending data that
  relates to customer development, such as price plan, value of purchases, etc. Once these have been sent to
  Intercom you can then apply filters based on these attributes.
-
- A detailed list of the fields you can use to [update a user is available here](https://developers.intercom.com/reference/#user-model )
-
- Attributes such as the user email or name can be updated by calling
-
- [Intercom updateUserWithAttributes:@{
- @"email" : @"admin@intercom.io",
- @"name" : @"Admin Name"
- }];
-
- Custom user attributes can be created and modified by passing a custom_attributes dictionary
- You do not have to create attributes in Intercom beforehand. If one hasn't been seen before, it will be
- created for you automatically.
-
- [Intercom updateUserWithAttributes:@{
- @"custom_attributes": @{
- @"paid_subscriber" : @YES,
- @"monthly_spend": @155.5,
- @"team_mates": @3
- }
- }];
-
- You can also set company data via this call by submitting an attribute dictionary like
-
- [Intercom updateUserWithAttributes:@{
- @"companies": @[ @{
- @"name" : @"My Company",
- @"id" : @"abcd1234"
- }
- ]}];
-
- id is a required field for adding or modifying a company. A detailed description of the
- [company model is available here](https://developers.intercom.com/reference/#companies )
-
- @param attributes This is a dictionary containing key/value pairs for multiple attributes.
- @note Attributes may be either a `string`, `integer`, `double`, `unix timestamp` or `bool`.
+ 
+ Details on attributes available to update can be found in ICMUserAttributes.
+ 
+ @param userAttributes The attributes to update the user with.
  */
-+ (void)updateUserWithAttributes:(NSDictionary *)attributes;
++ (void)updateUser:(ICMUserAttributes *)userAttributes;
+
+#pragma mark - Log Event
 
 /*!
  Log an event with a given name.
@@ -245,27 +218,44 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
 /*! @name Show Intercom messages and message composers */
 //=========================================================================================================
 
+#pragma mark - Present Messenger
+
 /*!
  Present the Intercom Messenger
 
- Opens the Intercom messenger to automatically to the best place for your users.
+ Opens the Intercom messenger automatically to the best place for your users.
  */
 + (void)presentMessenger;
 
 /*!
+  Present the message composer.
+  @param initialMessage An optional message that is used to pre-populate the composer with some text.
+ */
++ (void)presentMessageComposer:(nullable NSString *)initialMessage;
+
+/*!
  Present the message composer.
  */
-+ (void)presentMessageComposer;
++ (void)presentMessageComposer __attribute((deprecated("'+[Intercom presentMessageComposer]' is deprecated. 'Use +[Intercom presentMessageComposer:initialMessage]' instead.")));
 
 /*!
  Present the message composer with a message to pre-populate the composer.
  */
-+ (void)presentMessageComposerWithInitialMessage:(NSString *)message;
++ (void)presentMessageComposerWithInitialMessage:(NSString *)message __attribute((deprecated("'+[Intercom presentMessageComposerWithInitialMessage]' is deprecated. 'Use +[Intercom presentMessageComposer:initialMessage]' instead.")));
 
 /*!
  Present the conversation list.
  */
-+ (void)presentConversationList;
++ (void)presentConversationList __attribute((deprecated("'+[Intercom presentConversationList]' is deprecated. 'Use +[Intercom presentMessenger]' instead.")));;
+
+#pragma mark - Help Center
+
+/*!
+ Present the help center.
+ */
++ (void)presentHelpCenter;
+
+#pragma mark - Push Notifications
 
 //=========================================================================================================
 /*! @name Working with push notifications */
@@ -278,6 +268,25 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  @param deviceToken The device token provided in the `didRegisterForRemoteNotificationsWithDeviceToken` method.
  */
 + (void)setDeviceToken:(NSData *)deviceToken;
+
+/*!
+ Use this method to check if a push notification payload was sent by Intercom. Typically you should call
+ +[Intercom handleIntercomPushNotification:] after checking this.
+ 
+ @note This is only needed if you have set `IntercomAutoIntegratePushNotifications` to NO in your Info.plist
+ @return YES if the payload is an Intercom push notification, NO otherwise.
+ */
++ (BOOL)isIntercomPushNotification:(NSDictionary *)userInfo;
+
+/*!
+ Use this method to handle a push notification payload received by Intercom. You should first check if this
+ notification was send by Intercom with `+[Intercom isIntercomPushNotification:]`.
+ 
+ @note This is only needed if you have set `IntercomAutoIntegratePushNotifications` to NO in your Info.plist
+ */
++ (void)handleIntercomPushNotification:(NSDictionary *)userInfo;
+
+#pragma mark - Intercom UI Visibility
 
 //=========================================================================================================
 /*! @name Incoming message presentation options */
@@ -321,6 +330,8 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  */
 + (void)hideMessenger;
 
+#pragma mark - Unread Conversation Count
+
 //=========================================================================================================
 /*! @name Unread conversations */
 //=========================================================================================================
@@ -337,6 +348,8 @@ typedef NS_ENUM(NSUInteger, ICMPreviewPosition){
  This notification is fired when the number of unread conversations changes.
  */
 UIKIT_EXTERN NSString *const IntercomUnreadConversationCountDidChangeNotification;
+
+#pragma mark - Logging
 
 //=========================================================================================================
 /*! @name Enable logging */
@@ -359,25 +372,6 @@ UIKIT_EXTERN NSString *const IntercomUnreadConversationCountDidChangeNotificatio
 + (void)setNeedsStatusBarAppearanceUpdate;
 
 //=========================================================================================================
-/*! @name Deprecated methods */
-//=========================================================================================================
-
-/*!
- @deprecated +[Intercom setPreviewPosition:] is no longer supported, and will not work.
- */
-+ (void)setPreviewPosition:(ICMPreviewPosition)previewPosition __attribute((deprecated("'+[Intercom setPreviewPosition:]' is no longer supported and will not work")));
-
-/*!
- @deprecated  +[Intercom setPreviewPaddingWithX:y:] is deprecated. Use +[Intercom setBottomPadding:] instead.
- */
-+ (void)setPreviewPaddingWithX:(CGFloat)x y:(CGFloat)y __attribute((deprecated("'+[Intercom setPreviewPaddingWithX:y:]' is deprecated. Use '+[Intercom setBottomPadding:]' instead.")));
-
-/*!
- @deprecated +[Intercom setMessagesHidden:] is deprecated. Use +[Intercom setInAppMessagesVisible:] instead.
- */
-+ (void)setMessagesHidden:(BOOL)hidden __attribute((deprecated("'+[Intercom setMessagesHidden:]' is deprecated. 'Use +[Intercom setInAppMessagesVisible:]' instead.")));
-
-//=========================================================================================================
 /*! @name Intercom Notifications */
 //=========================================================================================================
 /*!
@@ -389,7 +383,8 @@ UIKIT_EXTERN NSString *const IntercomUnreadConversationCountDidChangeNotificatio
  Once the user taps on the chat head, the message is presented in your app. It will be presented covering
  the entire screen, but no notifications will be thrown here as Intercom has already been visible.
 
- In the case of a new conversation this notification may be used to prompt users to enable push notifications.
+ In the case of a new conversation the notification `IntercomDidStartNewConversationNotification` may be used to
+ prompt users to enable push notifications.
  */
 
 UIKIT_EXTERN NSString *const IntercomWindowWillShowNotification;

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Intercom.Sdk.Droid</RootNamespace>
     <AssemblyName>Intercom.Sdk.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
@@ -49,13 +49,24 @@
     <TransformFile Include="Transforms\Metadata.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\intercom-sdk-3.0.15.aar" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Additions\" />
+    <Folder Include="Jars\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\intercom-sdk-base-4.1.8.aar" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Android.Composer.Gallery\Android.Composer.Gallery.csproj">
+      <Project>{D59E0311-C00D-4AD8-8983-92A96152C706}</Project>
+      <Name>Android.Composer.Gallery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Android.Composer\Android.Composer.csproj">
+      <Project>{9D6B406E-ECB6-4291-995D-E67DAEB86B2E}</Project>
+      <Name>Android.Composer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <Import Project="..\packages\Xamarin.Android.Bindings.Generators.1.6.1.19\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets" Condition="Exists('..\packages\Xamarin.Android.Bindings.Generators.1.6.1.19\build\MonoAndroid\Xamarin.Android.Bindings.Generators.targets')" />

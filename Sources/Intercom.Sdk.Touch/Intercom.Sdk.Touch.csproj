@@ -45,6 +45,7 @@
     <NativeReference Include="..\..\Frameworks\Intercom.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
+      <LinkerFlags>-lxml2 -licucore</LinkerFlags>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />

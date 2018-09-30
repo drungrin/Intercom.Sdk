@@ -3,23 +3,25 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Intercom.Sdk</id>
-    <version>3.0.15-alpha2</version>
+    <version>5.1.4</version>
     <title>Intercom Sdk</title>
     <authors>Michel Moreira</authors>
     <projectUrl>https://github.com/drungrin/Intercom.Sdk</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The Intercom Xamarin SDK, for integrating Intercom into your Xamarin Android or iOS application.</description>
     <tags>xamarin, xamarin.forms, android, ios, intercom</tags>
-    <dependencies>
-      <group targetFramework="MonoAndroid10">
-        <dependency id="Intercom.Sdk.Base" version="3.0.15-alpha2" />
-        <dependency id="Intercom.Sdk.Gcm" version="3.0.15-alpha2" />
-      </group>
-    </dependencies>
   </metadata>
   <files>
     <!-- Xamarin.Android -->
     <file src="Sources/Intercom.Sdk.Droid/bin/Release/Intercom.Sdk.Droid.dll"
           target="lib/MonoAndroid10/Intercom.Sdk.Droid.dll" />
+    <file src="Sources/Android.Composer/bin/Release/Android.Composer.dll"
+          target="lib/MonoAndroid10/Android.Composer.dll" />
+      <file src="Sources/Android.Composer.Gallery/bin/Release/Android.Composer.Gallery.dll"
+          target="lib/MonoAndroid10/Android.Composer.Gallery.dll" />        
+    <!-- Xamarin.iOS -->
+    <file src="Sources/Intercom.Sdk.Touch/bin/Release/Intercom.Sdk.Touch.dll"
+          target="lib/Xamarin.iOS10/Intercom.Sdk.Touch.dll" />
+
   </files>
 </package>

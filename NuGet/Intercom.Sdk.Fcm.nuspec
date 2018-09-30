@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Intercom.Sdk.Fcm</id>
+    <version>4.1.8</version>
+    <title>Intercom Sdk (Fcm)</title>
+    <authors>Michel Moreira</authors>
+    <projectUrl>https://github.com/drungrin/Intercom.Sdk</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Intercom Xamarin SDK, for integrating Intercom into your Xamarin Android or iOS application.</description>
+    <tags>xamarin, xamarin.forms, android, ios, intercom</tags>
+    <dependencies>
+      <group targetFramework="MonoAndroid10">
+        <dependency id="Intercom.Sdk" version="4.1.8" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Xamarin.Android -->
+    <file src="Sources/Intercom.Sdk.Droid.Fcm/bin/Release/Intercom.Sdk.Droid.Fcm.dll"
+          target="lib/MonoAndroid10/Intercom.Sdk.Droid.Fcm.dll" />
+  </files>
+</package>
